@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="EducationLevelSpinnerStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <!-- Цвет рамки, когда поле активно (в фокусе) -->
+        <item name="boxStrokeColor">@color/black</item>
+        <!-- Цвет иконки (стрелочки) -->
+        <item name="endIconTint">@color/black</item>
+        <!-- Цвет текста подсказки (hint) -->
+        <item name="hintTextColor">@color/black</item>
+        <item name="android:textColorHint">@color/black</item>
+    </style>
+</resources>

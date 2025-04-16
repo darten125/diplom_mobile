@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground">
+
+    <!-- Обёртка для основного контента -->
+    <LinearLayout
+        android:id="@+id/verticalContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Шапка с синим фоном и белым текстом -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingTop="45dp"
+            android:paddingBottom="15dp"
+            android:background="@color/design_default_color_primary">
+
+            <!-- Имя -->
+            <TextView
+                android:id="@+id/userNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Жмуренко Владимир Константинович"
+                android:textColor="@android:color/white"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Роль -->
+            <TextView
+                android:id="@+id/userRoleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Бакалавр"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Группа -->
+            <TextView
+                android:id="@+id/userGroupTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1373"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <!-- Основной контейнер, внутри которого храним разные состояния -->
+        <FrameLayout
+            android:id="@+id/contentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!-- Состояние 1 (currentThesisId != null): показываем выбранную/активную ВКР -->
+            <LinearLayout
+                android:id="@+id/currentThesisContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="gone">
+
+                <!-- Детали ВКР -->
+                <TextView
+                    android:id="@+id/thesisTopicTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Тема ВКР"
+                    android:textStyle="bold"
+                    android:textSize="26sp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/thesisDescriptionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Описание ВКР"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/thesisTeacherTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Преподаватель" />
+
+            </LinearLayout>
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefresher"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- Состояние 2: список заявок -->
+                    <LinearLayout
+                        android:id="@+id/unfinalRequestsContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+
+                    <!-- Состояние 3: пустой список -->
+                    <LinearLayout
+                        android:id="@+id/emptyRequestsContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/emptyRequestsTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Запросы отсутствуют"
+                            android:textSize="26sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </FrameLayout>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- Обе кнопки поверх основного контента (сохраняем их размеры и расположение) -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="end|bottom">
+        <ImageButton
+            android:id="@+id/createFinalThesisButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="16dp"
+            android:layout_gravity="end|bottom"
+            android:visibility="gone"
+            app:srcCompat="@drawable/create_final_thesis_button"
+            android:scaleType="centerCrop"
+            android:background="@android:color/transparent"/>
+
+        <ImageButton
+            android:id="@+id/addButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="16dp"
+            android:layout_gravity="end|bottom"
+            android:visibility="gone"
+            app:srcCompat="@drawable/add_button"
+            android:scaleType="centerCrop"
+            android:background="@android:color/transparent"/>
+    </LinearLayout>
+
+</FrameLayout>
