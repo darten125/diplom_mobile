@@ -1,5 +1,6 @@
 package com.example.diplom_app.user
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,10 @@ import com.example.diplom_app.new_request.NewRequestDialogFragment
 
 
 class UserActivity : AppCompatActivity(), UserView {
+
+    companion object {
+        private const val RC_CREATE_THESIS = 2001
+    }
 
     private lateinit var binding: ActivityUserBinding
     private lateinit var presenter: UserPresenter
@@ -44,7 +49,7 @@ class UserActivity : AppCompatActivity(), UserView {
             val intent = Intent(this, CreateCurrentThesisActivity::class.java).apply {
                 putExtra("id", intent.getStringExtra("id"))
             }
-            startActivity(intent)
+            startActivityForResult(intent, RC_CREATE_THESIS)
         }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
@@ -128,4 +133,16 @@ class UserActivity : AppCompatActivity(), UserView {
     override fun hideLoading() {
         binding.swipeRefresher.isRefreshing = false
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_CREATE_THESIS && resultCode == Activity.RESULT_OK) {
+            val newCurrentId = data?.getStringExtra("currentThesisId")
+            if (!newCurrentId.isNullOrEmpty()) {
+                intent.putExtra("currentThesisId", newCurrentId)
+                presenter.loadUserData(intent)
+            }
+        }
+    }
+
 }

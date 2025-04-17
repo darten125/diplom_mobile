@@ -1,5 +1,6 @@
 package com.example.diplom_app.create_current_thesis
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -60,6 +61,11 @@ class CreateCurrentThesisActivity : AppCompatActivity(), CreateCurrentThesisView
 
     override fun onThesisCreated(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        // Отправляем назад в UserActivity id только что утверждённой заявки
+        val resultIntent = Intent().apply {
+            putExtra("currentThesisId", selectedRequest?.id)
+        }
+        setResult(RESULT_OK, resultIntent)
         finish()
     }
 
