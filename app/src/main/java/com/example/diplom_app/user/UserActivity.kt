@@ -63,27 +63,19 @@ class UserActivity : AppCompatActivity(), UserView {
         presenter.loadUserData(intent)
     }
 
-    // 1) Отображение текущей ВКР
     override fun displayCurrentThesis(request: GetCurrentThesisResponse) {
         runOnUiThread {
-            // Показываем контейнер с текущей ВКР
             binding.currentThesisContainer.visibility = View.VISIBLE
-            // Скрываем контейнер с RecyclerView
             binding.unfinalRequestsContainer.visibility = View.GONE
-            // Скрываем контейнер с пустыми запросами
             binding.emptyRequestsContainer.visibility = View.GONE
-            // Прячем кнопку добавления
             binding.addButton.visibility = View.GONE
             binding.createFinalThesisButton.visibility = View.GONE
-
-            // Заполняем поля
             binding.thesisTopicTextView.text = request.thesis.title
             binding.thesisDescriptionTextView.text = request.thesis.description
             binding.thesisTeacherTextView.text = request.thesis.professorName
         }
     }
 
-    // 2) Отображение списка заявок через RecyclerView
     override fun displayRequests(requests: List<ThesisRequestModel>) {
         runOnUiThread {
             binding.currentThesisContainer.visibility = View.GONE
@@ -108,7 +100,6 @@ class UserActivity : AppCompatActivity(), UserView {
         }
     }
 
-    // 3) Отображение контейнера, если запросов нет вообще
     override fun displayEmptyRequests() {
         runOnUiThread {
             binding.currentThesisContainer.visibility = View.GONE
@@ -119,7 +110,6 @@ class UserActivity : AppCompatActivity(), UserView {
         }
     }
 
-    // Вывод сообщения об ошибке
     override fun showError(message: String) {
         runOnUiThread {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()

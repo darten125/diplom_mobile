@@ -19,16 +19,12 @@ import retrofit2.Response
 
 class NewRequestDialogFragment : DialogFragment() {
 
-    // Используем прямое свойство binding, без _binding
     private lateinit var binding: DialogNewRequestBinding
 
-    // Переменная для сохранения выбранного преподавателя
     private var selectedProfessorId: String? = null
 
-    // Студенческий идентификатор передается через аргументы диалога
     private var studentId: String? = null
 
-    // Activity Result Launcher для ProfessorsListActivity
     private val professorResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -41,13 +37,10 @@ class NewRequestDialogFragment : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        // Получаем studentId из аргументов (перед тем, как открывать диалог, передайте его через Bundle)
         studentId = arguments?.getString("studentId") ?: ""
 
-        // Инициализируем binding через inflate
         binding = DialogNewRequestBinding.inflate(layoutInflater)
 
-        // Нажатие на поле выбора преподавателя – запускаем ProfessorsListActivity
         binding.chooseProfessor.setOnClickListener {
             val intent = Intent(requireContext(), ProfessorsListActivity::class.java)
             professorResultLauncher.launch(intent)

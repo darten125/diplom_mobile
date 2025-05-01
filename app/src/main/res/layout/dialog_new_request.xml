@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:padding="24dp">
 
-    <!-- Тема BKP -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +19,6 @@
             android:hint="Тема BKP"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Описание BKP -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +34,6 @@
             android:minLines="3"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Выбор преподавателя -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilSupervisor"
         android:layout_width="match_parent"
@@ -56,7 +53,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <!-- Кнопка подтверждения -->
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"

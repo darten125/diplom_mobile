@@ -58,11 +58,9 @@ class RegistrationActivity : AppCompatActivity(), RegistrationView {
     }
 
     override fun onRegistrationSuccess(token: String, userData: TokenValidationResponse) {
-        // Сохраняем токен в SharedPreferences
         val prefs = getSharedPreferences("diplom_prefs", Context.MODE_PRIVATE)
         prefs.edit().putString("login_token", token).apply()
 
-        // Создаем Intent для перехода в UserActivity и передаем данные пользователя
         val intent = Intent(this, UserActivity::class.java).apply {
             putExtra("id", userData.id)
             putExtra("name", userData.name)

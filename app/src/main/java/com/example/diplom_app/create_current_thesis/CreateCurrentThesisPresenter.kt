@@ -13,7 +13,6 @@ import retrofit2.Response
 class CreateCurrentThesisPresenter(private var view: CreateCurrentThesisView?) {
 
     fun loadApprovedRequests(intent: Intent) {
-        //view?.showLoading()
 
         val studentId = intent.getStringExtra("id") ?: ""
         val request = GetProcessedRequestsListRequest(studentId)
@@ -23,9 +22,7 @@ class CreateCurrentThesisPresenter(private var view: CreateCurrentThesisView?) {
                     call: Call<GetProcessedRequestsListResponse>,
                     response: Response<GetProcessedRequestsListResponse>
                 ) {
-                    //view?.hideLoading()
                     if (response.isSuccessful && response.body() != null) {
-                        // Фильтруем только те заявки, у которых accepted == true.
                         val approved = response.body()!!.requests.filter { it.accepted }
                         view?.showApprovedRequests(approved)
                     } else {
@@ -34,14 +31,12 @@ class CreateCurrentThesisPresenter(private var view: CreateCurrentThesisView?) {
                 }
 
                 override fun onFailure(call: Call<GetProcessedRequestsListResponse>, t: Throwable) {
-                    //view?.hideLoading()
                     view?.showError("Ошибка соединения: ${t.localizedMessage}")
                 }
             })
     }
 
     fun createCurrentThesis(processedRequestId: String) {
-        //view?.showLoading()
         val request = CreateCurrentThesisRequest(processedRequestId)
         RetrofitClient.instance.createCurrentThesis(request)
             .enqueue(object : Callback<CreateCurrentThesisResponse> {
@@ -49,7 +44,6 @@ class CreateCurrentThesisPresenter(private var view: CreateCurrentThesisView?) {
                     call: Call<CreateCurrentThesisResponse>,
                     response: Response<CreateCurrentThesisResponse>
                 ) {
-                    //view?.hideLoading()
                     if (response.isSuccessful && response.body() != null) {
                         view?.onThesisCreated(response.body()!!.message)
                     } else {
@@ -58,7 +52,6 @@ class CreateCurrentThesisPresenter(private var view: CreateCurrentThesisView?) {
                 }
 
                 override fun onFailure(call: Call<CreateCurrentThesisResponse>, t: Throwable) {
-                    //view?.hideLoading()
                     view?.showError("Ошибка соединения: ${t.localizedMessage}")
                 }
             })

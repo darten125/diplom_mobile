@@ -14,7 +14,6 @@ class ApprovedRequestAdapter(
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<ApprovedRequestAdapter.RequestViewHolder>() {
 
-    // Храним выбранную позицию; если ни одна не выбрана – -1.
     private var selectedPosition: Int = -1
 
     interface OnItemClickListener {
@@ -42,15 +41,13 @@ class ApprovedRequestAdapter(
         holder.thesisDescriptionTextView.text = request.description
         holder.professorNameTextView.text = request.professorName
 
-        // Если позиция совпадает с выбранной – показываем галочку.
         holder.checkMark.visibility = if (position == selectedPosition) View.VISIBLE else View.GONE
 
-        // Используем holder.adapterPosition для динамичного получения актуальной позиции
         holder.itemView.setOnClickListener {
             val pos = holder.adapterPosition
             if (pos != RecyclerView.NO_POSITION) {
                 selectedPosition = pos
-                notifyDataSetChanged()  // уведомляем для обновления галочек
+                notifyDataSetChanged()
                 listener.onRequestSelected(requests[pos])
             }
         }

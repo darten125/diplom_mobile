@@ -16,7 +16,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.concurrent.atomic.AtomicInteger
 
-// Модель для объединённого представления заявки в списке
 data class ThesisRequestModel(
     val id: String,
     val professorName: String,
@@ -31,7 +30,7 @@ class UserPresenter(private val view: UserView) {
 
     private var pendingList: List<PendingRequestItem> = listOf()
     private var processedList: List<ProcessedRequestItem> = listOf()
-    private val completedRequests = AtomicInteger(0) // Счётчик завершённых запросов
+    private val completedRequests = AtomicInteger(0)
 
     fun loadUserData(intent: Intent) {
         view.showLoading()
@@ -41,7 +40,6 @@ class UserPresenter(private val view: UserView) {
         if (currentThesisId != null) {
             getCurrentThesis(studentId)
         } else {
-            // Инициируем оба запроса
             loadProcessedRequests(studentId)
             loadPendingRequests(studentId)
         }
@@ -112,7 +110,6 @@ class UserPresenter(private val view: UserView) {
             })
     }
 
-    // Вызывается после завершения каждого запроса
     private fun markRequestComplete() {
         if (completedRequests.incrementAndGet() < 2) return
         combineRequests()
@@ -122,7 +119,6 @@ class UserPresenter(private val view: UserView) {
     private fun combineRequests() {
         val combinedRequests = mutableListOf<ThesisRequestModel>()
 
-        // Обрабатываем ожидающие заявки
         pendingList.forEach { item ->
             combinedRequests.add(
                 ThesisRequestModel(
@@ -137,7 +133,6 @@ class UserPresenter(private val view: UserView) {
             )
         }
 
-        // Обрабатываем обработанные заявки
         processedList.forEach { item ->
             val icon = if (item.accepted)
                 R.drawable.accepted_request_icon

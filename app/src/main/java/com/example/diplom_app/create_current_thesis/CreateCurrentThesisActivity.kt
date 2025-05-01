@@ -30,7 +30,6 @@ class CreateCurrentThesisActivity : AppCompatActivity(), CreateCurrentThesisView
         binding.approvedRequestsRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.approvedRequestsRecyclerView.adapter = adapter
 
-        // Загружаем одобренные заявки
         presenter.loadApprovedRequests(intent)
 
         binding.approveThesisButton.setOnClickListener {
@@ -42,18 +41,9 @@ class CreateCurrentThesisActivity : AppCompatActivity(), CreateCurrentThesisView
         }
     }
 
-    // Реализация методов CreateCurrentThesisView:
     override fun showApprovedRequests(requests: List<ProcessedRequestItem>) {
         adapter.updateRequests(requests)
     }
-
-    /*override fun showLoading() {
-        // Если у вас есть прогрессбар в layout – используйте его, иначе можно оставить пустым
-    }*/
-
-    /*override fun hideLoading() {
-        // Скрыть индикатор загрузки
-    }*/
 
     override fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -61,7 +51,6 @@ class CreateCurrentThesisActivity : AppCompatActivity(), CreateCurrentThesisView
 
     override fun onThesisCreated(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-        // Отправляем назад в UserActivity id только что утверждённой заявки
         val resultIntent = Intent().apply {
             putExtra("currentThesisId", selectedRequest?.id)
         }

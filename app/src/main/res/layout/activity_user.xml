@@ -7,14 +7,12 @@
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground">
 
-    <!-- Обёртка для основного контента -->
     <LinearLayout
         android:id="@+id/verticalContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Шапка с синим фоном и белым текстом -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,7 +22,6 @@
             android:paddingBottom="15dp"
             android:background="@color/design_default_color_primary">
 
-            <!-- Имя -->
             <TextView
                 android:id="@+id/userNameTextView"
                 android:layout_width="wrap_content"
@@ -35,7 +32,6 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="4dp" />
 
-            <!-- Роль -->
             <TextView
                 android:id="@+id/userRoleTextView"
                 android:layout_width="wrap_content"
@@ -45,7 +41,6 @@
                 android:textSize="17sp"
                 android:layout_marginBottom="4dp" />
 
-            <!-- Группа -->
             <TextView
                 android:id="@+id/userGroupTextView"
                 android:layout_width="wrap_content"
@@ -56,14 +51,12 @@
 
         </LinearLayout>
 
-        <!-- Основной контейнер, внутри которого храним разные состояния -->
         <FrameLayout
             android:id="@+id/contentContainer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <!-- Состояние 1 (currentThesisId != null): показываем выбранную/активную ВКР -->
             <LinearLayout
                 android:id="@+id/currentThesisContainer"
                 android:layout_width="match_parent"
@@ -72,7 +65,6 @@
                 android:padding="16dp"
                 android:visibility="gone">
 
-                <!-- Детали ВКР -->
                 <TextView
                     android:id="@+id/thesisTopicTextView"
                     android:layout_width="wrap_content"
@@ -109,7 +101,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <!-- Состояние 2: список заявок -->
                     <LinearLayout
                         android:id="@+id/unfinalRequestsContainer"
                         android:layout_width="match_parent"
@@ -124,7 +115,6 @@
 
                     </LinearLayout>
 
-                    <!-- Состояние 3: пустой список -->
                     <LinearLayout
                         android:id="@+id/emptyRequestsContainer"
                         android:layout_width="match_parent"
@@ -148,7 +138,6 @@
         </FrameLayout>
     </LinearLayout>
 
-    <!-- Обе кнопки поверх основного контента (сохраняем их размеры и расположение) -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

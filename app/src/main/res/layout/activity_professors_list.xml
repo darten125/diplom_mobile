@@ -10,7 +10,6 @@
     android:background="?android:attr/windowBackground"
     tools:context=".professors.professors_list.ProfessorsListActivity">
 
-    <!-- Шапка с кнопкой назад и заголовком -->
     <LinearLayout
         android:id="@+id/headerContainer"
         android:layout_width="match_parent"
@@ -18,7 +17,6 @@
         android:orientation="vertical"
         android:padding="13dp">
 
-        <!-- Кнопка назад -->
         <ImageButton
             android:id="@+id/backButton"
             android:layout_width="40dp"
@@ -27,7 +25,6 @@
             android:src="@drawable/black_baseline_keyboard_backspace_24"
             android:background="?attr/selectableItemBackgroundBorderless"/>
 
-        <!-- Заголовок страницы -->
         <TextView
             android:id="@+id/tvPageTitle"
             android:layout_width="wrap_content"
@@ -40,7 +37,6 @@
             android:textColor="@android:color/black" />
     </LinearLayout>
 
-    <!-- Основной контейнер с отступами -->
     <LinearLayout
         android:id="@+id/containerContent"
         android:layout_width="match_parent"
@@ -48,7 +44,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Первый список: Кафедры -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerDepartments"
             android:layout_width="match_parent"
@@ -56,7 +51,6 @@
             android:layout_marginBottom="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <!-- Второй список: Преподаватели (изначально скрыт) -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerProfessors"
             android:layout_width="match_parent"
